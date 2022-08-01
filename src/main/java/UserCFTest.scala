@@ -30,7 +30,7 @@ object UserCFTest {
     //从数据模型中获取所有用户的ID迭代器
     val usersIterator = dataModel.getUserIDs
 
-    println("=============================")
+    println("=================================")
 
     //通过迭代器遍历所有用户ID
     while (usersIterator.hasNext) {
