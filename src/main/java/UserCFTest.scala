@@ -1,7 +1,7 @@
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender
-import org.apache.mahout.cf.taste.impl.similarity.{EuclideanDistanceSimilarity, PearsonCorrelationSimilarity, UncenteredCosineSimilarity}
+import org.apache.mahout.cf.taste.impl.similarity.{CityBlockSimilarity, EuclideanDistanceSimilarity, LogLikelihoodSimilarity, PearsonCorrelationSimilarity, SpearmanCorrelationSimilarity, TanimotoCoefficientSimilarity, UncenteredCosineSimilarity}
 import org.apache.mahout.cf.taste.recommender.RecommendedItem
 
 import java.{io, util}
@@ -18,9 +18,19 @@ object UserCFTest {
     val euclideanSimilarity = new EuclideanDistanceSimilarity(dataModel)
     //皮尔森相似度
     val pearsonCorrelationSimilarity = new PearsonCorrelationSimilarity(dataModel)
+    // 基于Manhattan距离相似度
+    val cityBlockSimilarity = new CityBlockSimilarity(dataModel)
+    // 基于欧几里德距离计算相似度
+    val euclideanDistanceSimilarity = new EuclideanDistanceSimilarity(dataModel)
+    // 基于对数似然比的相似度
+    val logLikelihoodSimilarity = new LogLikelihoodSimilarity(dataModel)
+    // 基于皮尔斯曼相关系数相似度
+    val spearmanCorrelationSimilarity = new SpearmanCorrelationSimilarity(dataModel)
+    // 基于谷本系数计算相似度
+    val tanimotoCoefficientSimilarity = new TanimotoCoefficientSimilarity(dataModel)
 
     val k = 10
-    val currentSimilarity = pearsonCorrelationSimilarity
+    val currentSimilarity = spearmanCorrelationSimilarity
     //定义用户的k最近邻
     val userNeighborhood = new NearestNUserNeighborhood(k, currentSimilarity, dataModel)
 
